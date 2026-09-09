@@ -1,0 +1,14 @@
+# Reverse proxy in front of hermes-relay.
+# TLS terminates here. hermes-relay stays on 127.0.0.1:8099.
+
+your-tunnel.example {
+	encode gzip
+
+	# Do not buffer SSE / streamed MCP responses if you switch json_response off.
+	reverse_proxy 127.0.0.1:8099 {
+		flush_interval -1
+		header_up Host {host}
+		header_up X-Real-IP {remote_host}
+		header_up X-Forwarded-Proto https
+	}
+}

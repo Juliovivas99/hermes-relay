@@ -1,0 +1,17 @@
+hermes-relay
+Copyright (c) 2026 Julio Vivas
+
+This project is an original, clean-room implementation. It is not a copy of
+iamsupersocks/grokbot-hermes-bridge or any other third-party bridge.
+
+DIRECTION NOTICE
+----------------
+hermes-relay enables **Grok Bot → Hermes**.
+
+Grok Bot (cloud) authenticates with OAuth 2.1 and calls MCP tools on this
+gateway. The gateway then invokes a local `hermes` CLI as a bounded
+subprocess. Hermes cannot call Grok Bot built-in tools through this project.
+That reverse direction is impossible unless Grok exposes its own MCP server.
+
+This software does not vendor Hermes Agent. You must install Hermes yourself
+and keep `~/.hermes` on the operator machine.

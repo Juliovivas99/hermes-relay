@@ -1,0 +1,23 @@
+[Unit]
+Description=hermes-relay MCP gateway
+After=network.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=hermes
+Group=hermes
+WorkingDirectory=/var/lib/hermes-relay
+EnvironmentFile=/var/lib/hermes-relay/.env
+ExecStart=/usr/bin/hermes-relay serve --env-file /var/lib/hermes-relay/.env
+Restart=on-failure
+RestartSec=3
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=read-only
+ReadWritePaths=/var/lib/hermes-relay
+# Hermes still needs read access to the operator HERMES_HOME.
+
+[Install]
+WantedBy=multi-user.target

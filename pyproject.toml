@@ -1,0 +1,57 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "hermes-relay"
+version = "0.1.0"
+description = "Self-hosted Streamable-HTTP MCP gateway that lets Grok Bot call a local Hermes Agent"
+readme = "README.md"
+license = { text = "MIT" }
+authors = [{ name = "Julio Vivas" }]
+requires-python = ">=3.11"
+keywords = ["mcp", "hermes", "grok", "oauth", "gateway"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Security",
+    "Topic :: Internet :: WWW/HTTP :: HTTP Servers",
+]
+dependencies = [
+    "mcp>=2.0,<3",
+    "uvicorn[standard]>=0.34,<1",
+    "starlette>=0.40,<2",
+    "python-dotenv>=1.0,<2",
+    "pyjwt>=2.8,<3",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8,<10",
+    "pytest-asyncio>=0.24,<2",
+    "httpx>=0.27,<1",
+]
+
+[project.scripts]
+hermes-relay = "hermes_relay.cli:main"
+
+[project.urls]
+Homepage = "https://github.com"
+Documentation = "README.md"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
+testpaths = ["tests"]
+filterwarnings = [
+    "ignore::DeprecationWarning",
+]
